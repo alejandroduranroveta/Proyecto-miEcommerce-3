@@ -8,11 +8,11 @@
         "gallery": [
             {
                 "picture_id": 1,
-                "picture_url": "https://ibb.co/bgYzB19"
+                "picture_url": ""
             },
             {
                 "picture_id": 2,
-                "picture_url": "https://ibb.co/DpB8HHp"
+                "picture_url": ""
             }
         ],
         "category": "Fruta",
@@ -28,11 +28,11 @@
         "gallery": [
             {
                 "picture_id": 1,
-                "picture_url": "https://ibb.co/8zvwjyg"
+                "picture_url": ""
             },
             {
                 "picture_id": 2,
-                "picture_url": "https://ibb.co/x1D01m2"
+                "picture_url": ""
             }
         ],
         "category": "Verdura",
@@ -41,18 +41,18 @@
     },
     {
         "id": 3,
-        "title": "Arvejas cololó",
+        "title": "Arvejas en lata",
         "price": 87,
-        "description": "Lata de arvejas",
+        "description": "Lata de arvejas 450gr",
         "image": "https://ibb.co/0Z4QQ7k",
         "gallery": [
             {
                 "picture_id": 1,
-                "picture_url": "https://ibb.co/Z1v9Bn7"
+                "picture_url": ""
             },
             {
                 "picture_id": 2,
-                "picture_url": "https://ibb.co/d7WDt4P"
+                "picture_url": ""
             }
         ],
         "category": "Conservas",
@@ -68,11 +68,11 @@
         "gallery": [
             {
                 "picture_id": 1,
-                "picture_url": "https://ibb.co/7kyLNQT"
+                "picture_url": ""
             },
             {
                 "picture_id": 2,
-                "picture_url": "https://ibb.co/RNXLTCt"
+                "picture_url": ""
             }
         ],
         "category": "Computación",
@@ -88,11 +88,11 @@
         "gallery": [
             {
                 "picture_id": 1,
-                "picture_url": "https://ibb.co/Yt3LN3c"
+                "picture_url": ""
             },
             {
                 "picture_id": 2,
-                "picture_url": "https://ibb.co/FgGX3w6"
+                "picture_url": ""
             }
         ],
         "category": "Computación",
