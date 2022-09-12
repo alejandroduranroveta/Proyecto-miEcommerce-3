@@ -1,2 +1,2 @@
-#Sprint 1 - Grupo 3 Digital House
+Sprint 1 - Grupo 3 Digital House
 *** 
