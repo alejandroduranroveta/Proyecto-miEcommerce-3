@@ -7,7 +7,7 @@ function extractToken (req) {
     }else{
         return null;
     }
-    
+
 }
 
 module.export = extractToken;
