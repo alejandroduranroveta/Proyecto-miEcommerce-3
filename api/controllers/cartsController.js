@@ -10,7 +10,7 @@ const cartById = (req, res) => {
 
         const cart = data.find(c => c.user === Number(id));
 
-        if (!cart || id == -1) {
+        if (!cart || id == 0) {
             return res.status(404).json({
                 msg: "El carrito no existe"
             })
