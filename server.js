@@ -1,17 +1,12 @@
 const express = require('express');
 const app = express();
-const productRoutes = require("./routes/productRoutes");
-const userRoutes = require("./routes/userRoutes");
-const cartRoutes = require('./routes/cartRoutes')
-
 app.use(express.json());
-require('dotenv').config();
+const productRoutes = require("./api/routes/productRoutes.js");
+const userRoutes = require("./api/routes/userRoutes");
 
-const PORT = process.env.PORT;
+require('dotenv').config(); 
 
-// app.use("/api/v1/products",productRoutes);
-// app.use("/api/v1/users",userRoutes);
-app.use("/api/v1/carts",cartRoutes)
+app.use("/api/v1/products",productRoutes);
+//app.use("/api/v1/users",userRoutes);
 
-app.listen(PORT,()=>console.log("Se levanto el server en " + PORT));
-
+app.listen(5000,()=>console.log("Se levanto el server"));
