@@ -6,8 +6,7 @@
         "password": "123456",
         "firstname": "Juan",
         "lastname": "Perez",
-        "profilepic": "https://ibb.co/zF5mrtX",
-        "role": "Guest"
+        "profilepic": "https://ibb.co/zF5mrtX"
     },
     {
         "id": 2,
@@ -16,8 +15,7 @@
         "password": "123456",
         "firstname": "Carlos",
         "lastname": "Gonzalez",
-        "profilepic": "https://ibb.co/BVmwZdz",
-        "role": "Admin"
+        "profilepic": "https://ibb.co/BVmwZdz"
     },
     {
         "id": 3,
@@ -26,8 +24,7 @@
         "password": "123456",
         "firstname": "Pablo",
         "lastname": "García",
-        "profilepic": "https://ibb.co/vD9Xxn5",
-        "role": "GOD"
+        "profilepic": "https://ibb.co/vD9Xxn5"
     },
     {
         "id": 4,
@@ -36,8 +33,7 @@
         "password": "123456",
         "firstname": "Gimena",
         "lastname": "Chavez",
-        "profilepic": "https://ibb.co/3d6mSDw",
-        "role": "Guest"
+        "profilepic": "https://ibb.co/3d6mSDw"
     },
     {
         "id": 5,
@@ -46,7 +42,6 @@
         "password": "123456",
         "firstname": "Camila",
         "lastname": "Sánchez",
-        "profilepic": "https://ibb.co/jTFDfcR",
-        "role": "Guest"
+        "profilepic": "https://ibb.co/jTFDfcR"
     }
 ]
