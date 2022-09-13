@@ -4,10 +4,10 @@ const userController = {
 	list: (req, res) => {
 		try {
 			const bdUser = fs.readFileSync(
-				path.join(__dirname, "/../", "users.json"),
+				path.join(__dirname, "/../data/users.json"),
 				"utf-8"
 			);
-			res.status(200).json(bdUser);
+			res.status(200).json(JSON.parse(bdUser));
 		} catch (error) {
 			console.log(error);
 			res.status(500).json({
@@ -18,12 +18,13 @@ const userController = {
 	searchById: (req, res) => {
 		try {
 			const bdUser = fs.readFileSync(
-				path.join(__dirname, "/../", "users.json"),
+				path.join(__dirname, "/../data/users.json"),
 				"utf-8"
 			);
 			let users = JSON.parse(bdUser);
-			let user = products.find((e) => e.id === Number(req.params.id));
-			!user
+			let user = users.find((e) => e.id === Number(req.params.id));
+			console.log(user);
+			user
 				? res.status(200).json(user)
 				: res.status(404).json({ msg: "Not fund user" });
 		} catch (error) {
@@ -41,6 +42,7 @@ const userController = {
 				firtsname = "Anonymous",
 				lastname = "Anonymous",
 				profilepic = "www.img.com",
+				role
 			} = req.body;
 			let newUser = {
 				id,
@@ -50,18 +52,20 @@ const userController = {
 				firtsname,
 				lastname,
 				profilepic,
+				role
 			};
 			const bdUser = fs.readFileSync(
-				path.join(__dirname, "/../", "users.json"),
+				path.join(__dirname, "/../data/users.json"),
 				"utf-8"
 			);
 			let users = JSON.parse(bdUser);
 			users.push(newUser);
 			fs.writeFileSync(
-				path.join(__dirname, "/../", "users.json"),
+				path.join(__dirname, "/../data/users.json"),
 				JSON.stringify(users)
 			);
-			req.method !== "POST"
+			console.log(req.method);
+			req.method === "POST"
 				? res.status(201).json(newUser)
 				: res
 						.status(400)
@@ -73,23 +77,23 @@ const userController = {
 	},
 	modifyUser: (req, res) => {
 		try {
-			let id = req.body.id;
-			if (!id) {
+			let id = req.params.id;
+			if (id) {
 				let bdUser = fs.readFileSync(
-					path.join(__dirname, "/../", "users.json"),
+					path.join(__dirname, "/../data/users.json"),
 					"utf-8"
 				);
 				let users = JSON.parse(bdUser);
 				let usuariAmodificar = req.body;
 				let usersAux = users.find((e) => e.id === Number(id));
-				if (!usersAux) {
+				if (usersAux) {
 					usersAux = users.filter((e) => e.id !== Number(id));
 				} else {
 					return res.status(404);
 				}
 				usersAux.push(usuariAmodificar);
 				bdUser = fs.writeFileSync(
-					path.join(__dirname, "/../", "users.json"),
+					path.join(__dirname, "/../data/users.json"),
 					JSON.stringify(usersAux)
 				);
 				res.status(200).json({ usuariAmodificar });
@@ -104,17 +108,17 @@ const userController = {
 	delete: (req, res) => {
 		try {
 			let id = req.body.id;
-			if (!id) {
+			if (id) {
 				let bdUser = fs.readFileSync(
-					path.join(__dirname, "/../", "users.json"),
+					path.join(__dirname, "/../data/users.json"),
 					"utf-8"
 				);
 				let users = JSON.parse(bdUser);
 				let userDelete = users.find((e) => e.id === Number(id));
-				if (!userDelete) {
+				if (userDelete) {
 					let usersAux = users.filter((e) => e.id !== Number(id));
 					bdUser = fs.writeFileSync(
-						path.join(__dirname, "/../", "users.json"),
+						path.join(__dirname, "/../data/users.json"),
 						JSON.stringify(usersAux)
 					);
 					res.status(200).json(userDelete);

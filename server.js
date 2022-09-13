@@ -6,6 +6,6 @@ app.use(express.json());
 require('dotenv').config(); 
 
 // app.use("/api/v1/products",productRoutes);
-// app.use("/api/v1/users",userRoutes);
+app.use("/api/v1/users",userRoutes);
 
 app.listen(process.env.PORT,()=>console.log("Se levanto el server"));
