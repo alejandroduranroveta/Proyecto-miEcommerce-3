@@ -1,5 +1,7 @@
 const express = require('express');
-const {list,detail,create,modify,mostwanted,deleted} = require('../controllers/productsController');
+const path = require('path')
+
+const {list,detail,create,modify,mostwanted,deleted} = require(path.resolve(__dirname,'../controllers/productsController'))
 const router = express.Router();
 
 router.get('/search',list)
