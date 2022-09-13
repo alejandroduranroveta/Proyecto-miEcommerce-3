@@ -1,0 +1,155 @@
+openapi: 3.0.0
+info:
+  title: Mi ecommerce
+  version: 1.0.0
+  description: |-
+    Esta es la API de Mi ecommerce.
+    
+    Links:
+    - [Repositorio de Github](https://github.com/alejandroduranroveta/Proyecto-miEcommerce-3)
+  
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Servidor de la api
+    
+tags:
+  - name: Usuarios
+    description: Todos los endpoints de usuarios
+  - name: Productos
+    description: Todos los endpoints de productos
+  - name: Carritos
+    description: Todos los endpoint para carrito
+
+  
+paths:
+  /users:
+    get:
+      tags: 
+        - Usuarios
+      summary:  Recupera la lista de users. Responde con un array conteniendo todos los users del sistema..
+      responses:
+        '200':    # status code
+          description: Un array de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Usuario'
+        '500':
+          description: Error del Servidor
+    post:
+      tags:
+        - Usuarios
+      summary:  Crea un nuevo user. Debe recibir un body con la info del user a crear. Responde con la info completa del nuevo user.
+      requestBody:
+        description: Crea un nuevo user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+        required: true
+      responses:
+        '201':
+          description: Creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '400':
+          description: Bad request
+        '500':
+          description: Error del servidor
+  /users/{id}:
+    get:
+      tags: 
+        - Usuarios
+      summary: Recupera el user con el id solicitado. Responde con la información completa del user con el id buscado.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          description: Id del usuario a buscar
+      responses: 
+        '200':
+          description: El usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '404':
+          description: Usuario no encontrado
+        '500':
+          description: Error del servidor
+    put:
+      tags:
+        - Usuarios
+      summary: Actualiza el user identificado con id. Debe recibir un body con la info del user a modificar. Responde con la info completa del user modificado.
+      requestBody:
+        description: Editar el usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+        required: true
+      responses: 
+        '200':
+          description: El usuario fue editado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '400':
+          description: Bad request
+        '404':
+          description: Usuario no encontrado
+        '500':
+          description: Error del servidor
+    delete:
+      tags:
+        - Usuarios
+      summary: Eliminar el user identificado con id. Cuando se elimina un user, primero debe vaciarse su carrito (cart). 
+      responses: 
+        '200':
+          description: El usuario fue eliminado
+        '400':
+          description: Bad request
+        '404':
+          description: Usuario no encontrado
+        '500':
+          description: Error del servidor     
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        email:
+          type: string
+          example: ejemplo@email.com
+        username:
+          type: string
+          example: anon
+        password:
+          type: string
+          example: 12232dse
+        firstname:
+          type: string
+          example: Jefferson
+        lastName:
+          type: string
+          example: Gutierritos
+        profilepic:
+          type: string
+          example: shorturl.at/IJK45
+      xml:
+        name: usuarios

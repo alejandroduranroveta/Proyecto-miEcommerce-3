@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const {cartById, editCart} = require('../api/controllers/cartsController')
+const {cartById, editCart} = require('../controllers/cartsController')
 
 
 const router = express.Router();
