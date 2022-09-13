@@ -49,7 +49,7 @@ const productsController = {
    
          if (!dataToShow) {
             return res.status(404).json({
-               msg: 'Not found detail'
+               msg: 'Not found'
             })
          }
          res.send(dataToShow)
@@ -61,7 +61,6 @@ const productsController = {
       }
    
       },
-
       create: (req, res) => {//agregar un nuevo producto a la bd
       
       let { id, title = "", price= 0,description= "",image= "",gallery = [{picture_id:1,picture_url:""}],category= 0,mostwanted,stock} = req.body;
