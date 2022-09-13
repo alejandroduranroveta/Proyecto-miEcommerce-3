@@ -1,13 +1,15 @@
 const express = require('express');
-const {list,detail,create,modify,mostwanted,actionSearch,categoryId,deleted} = require('../controllers/productsController');
+const {list,detail,create,modify,mostwanted,deleted} = require('../controllers/productsController');
 const router = express.Router();
 
-router.get('/',list);
-router.get('',categoryId)//PROBLM
+router.get('/search',list)
 router.get('/mostwanted',mostwanted)
+router.get('/',list); //aca hace listado y ademas hace la busqueda por category
+
+
 router.post('/',create)
 router.put('/:id',modify)
-router.get('/search',actionSearch)
+
 router.get('/:id',detail)
 router.delete('/:id',deleted)
 
