@@ -1,15 +1,14 @@
 const express = require('express');
-const {list,detail,create,modify,deleted} = require('../controllers/productsController');
+const {list,detail,create,modify,mostwanted,actionSearch,categoryId,deleted} = require('../controllers/productsController');
 const router = express.Router();
 
 router.get('/',list);
-router.get('/:id',detail)
+router.get('',categoryId)//PROBLM
+router.get('/mostwanted',mostwanted)
 router.post('/',create)
 router.put('/:id',modify)
-//query strings
-//router.get('/search?',actionSearch)
-//router.get('/mostwanted',mostwanted)
-//router.get('/products?category=ID',categoryId)
+router.get('/search',actionSearch)
+router.get('/:id',detail)
 router.delete('/:id',deleted)
 
 module.exports = router;

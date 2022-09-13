@@ -1,14 +1,14 @@
 //const db = require('../data/products');
 const fs = require('fs');
+const path = require('path')
 
 //const db = JSON.parse(fs.readFileSync('/Users/marioalejandroduran/Desktop/BootCamp/Sprint1/Proyecto-miEcommerce-3/api/data/products.json', 'utf8'));
 
 const productsController = {
     'list': (req, res) => {
        try {
-         const db = JSON.parse(fs.readFileSync('/Users/marioalejandroduran/Desktop/BootCamp/Sprint1/Proyecto-miEcommerce-3/api/data/products.json', 'utf8'));
+         const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
           res.status(200).json(db);
-          res.send(db)
        } catch (error) {
           console.log(error);
           res.status(500).json({
@@ -19,15 +19,15 @@ const productsController = {
       },
       'detail': (req, res) => {
          //Producto segun id
-         const { id } = req.params;
+         const id  = req.params.id;
    
       try {  
-         const db = JSON.parse(fs.readFileSync('/Users/marioalejandroduran/Desktop/BootCamp/Sprint1/Proyecto-miEcommerce-3/api/data/products.json', 'utf8')); 
+         const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
          const dataToShow = db.find(elm => elm.id === Number(id));
    
          if (!dataToShow) {
             return res.status(404).json({
-               msg: 'Not found'
+               msg: 'Not found detail'
             })
          }
          res.send(dataToShow)
@@ -60,9 +60,10 @@ const productsController = {
          }
       
          try {
-            const db = JSON.parse(fs.readFileSync('/Users/marioalejandroduran/Desktop/BootCamp/Sprint1/Proyecto-miEcommerce-3/api/data/products.json', 'utf8'));
+            const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
             db.push(newProduct);
             res.send(newProduct);
+            
          } catch (error) {
             console.log(error);
             res.status(500).json({
@@ -73,11 +74,11 @@ const productsController = {
       'modify': (req, res) => {
          try{
             let product = db.filter(el => el.id == req.params.id)
-            const db = JSON.parse(fs.readFileSync('/Users/marioalejandroduran/Desktop/BootCamp/Sprint1/Proyecto-miEcommerce-3/api/data/products.json', 'utf8'));
+            const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
             if(product){
                let data = req.body;
                data.id = req.params.id
-               if(data.title) product[0].title = data.title;
+               if(data.title) product[0].title = data.title ;
                if(data.price) product[0].price = data.price;
                if(data.description) product[0].description = data.description;
                if(data.image) product[0].image = data.image;
@@ -99,30 +100,32 @@ const productsController = {
             });
          }
       },
-      //  'actionSearch': (req, res) => {
-      //    const { q } = req.query.q;
-      //    console.log(res.query.q)
-      //    let search = req.query.q
-      //   try{
-      //     const db = JSON.parse(fs.readFileSync('/Users/marioalejandroduran/Desktop/BootCamp/Sprint1/Proyecto-miEcommerce-3/api/data/products.json', 'utf8')); 
-      //      let product = db.include(search)
-      //        res.send(product)
-      //     }catch (error) {
-      //       res.status(500).json({
-      //           msg: 'Error'
-      //       });
-
-      //     }  
-      //  },
+       'actionSearch': (req, res) => {
+         const { q } = req.query;
+         
+        try{
+         let search = q.toLowerCase()
+         const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
+         let product = db.filter(p => {return p.title.toLowerCase().includes(search)
+                                       || p.description.toLowerCase().includes(search)
+                                       || p.category.toLowerCase().includes(search)})
+          res.send(product)
+          }catch (error) {
+            console.log(error)
+            res.status(500).json({
+                msg: 'Error'
+            });
+          }  
+       },
       'mostwanted': (req, res) => {
          const { mostwanted } = req.params;
+         console.log(mostwanted)
          try {
-           const db = JSON.parse(fs.readFileSync('/Users/marioalejandroduran/Desktop/BootCamp/Sprint1/Proyecto-miEcommerce-3/api/data/products.json', 'utf8'));
-           let products = db.filter(el => el.mostwanted == true)
-           res.status(200).json(products);
+         const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
+         let products = db.filter(el => el.mostwanted == true)
+         res.status(200).json(products);
 
          } catch (error) {
-            console.log('cristina')
             console.log(error);
             res.status(500).json({
                msg: 'Server Error'
@@ -130,12 +133,13 @@ const productsController = {
          }
       },
       'categoryId':(req, res) => {
-         const{id} = req.params
+         const{category} = req.query
          try {
-            const db = JSON.parse(fs.readFileSync('/Users/marioalejandroduran/Desktop/BootCamp/Sprint1/Proyecto-miEcommerce-3/api/data/products.json', 'utf8'));
-            const dataToShow = db.find(elm => elm.id === Number(id));
+         let search = category.toLowerCase()
+         const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
+         let product = db.filter(p => {return p.category.toLowerCase().includes(search)})
+          res.send(product)
          }catch (error) {
-         console.log('cristina')
          console.log(error);
          res.status(500).json({
             msg: 'Server Error'
@@ -146,10 +150,12 @@ const productsController = {
          const { id } = req.params;
 
          try {
-            const db = JSON.parse(fs.readFileSync('/Users/marioalejandroduran/Desktop/BootCamp/Sprint1/Proyecto-miEcommerce-3/api/data/products.json', 'utf8'));
-            const newData = db.filter(el => el.id !== Number(id));
+            const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
+            const newData = db.filter(el => el.id != Number(id));
             fs.writeFileSync('db.json', JSON.stringify(newData));
-            res.send('producto eliminado con exito');
+            // res.status(200).json({
+            //    msg:'OK'
+            // });
       
          } catch (error) {
             console.log(error);
