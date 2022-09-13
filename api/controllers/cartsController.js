@@ -17,7 +17,7 @@ const cartById = (req,res) =>{
        }
  
        res.status(200).json({
-            products: cart.cart.map(c => c.product)
+            products: cart.cart
        })
     } catch (error) {
         console.log(error);

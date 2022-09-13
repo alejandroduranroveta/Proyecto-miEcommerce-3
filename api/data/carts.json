@@ -1,13 +1,6 @@
 [
   {
-    "user": 1,
-    "cart": [{
-        "product" : 1,
-        "quantity" : 3
-    },
-    {
-        "product" : 2,
-        "quantity" : 1
-    }]
+    "user": 0,
+    "cart": []
   }
 ]
