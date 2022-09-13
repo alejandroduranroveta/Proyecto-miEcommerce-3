@@ -5,17 +5,20 @@ const path = require('path')
 const productsController = {
    
     list: (req, res) => {
-      console.log(!req.query.q)
+     // console.log(!req.query.q)
        try {
          if(req.query.category){
              //busqueda por categoria
              const{category} = req.query
              const search = category.toLowerCase()
 
-             let db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
-             let product = db.filter(el => {el.category.toLowerCase().includes(search)})
-//ver porque esta vacio
-             return res.status(200).json(product)
+             let data = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
+             let product = data.filter( el => { 
+               return el.category.toLowerCase().includes(search)})
+             if(!product){
+               res.send(product)
+             }
+             return res.status(200).json(product) 
          }
          if(req.query.q){
             let{q} = req.query;
@@ -30,7 +33,6 @@ const productsController = {
             const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
             return res.status(200).json(db);        
          }
-
        } catch (error) {
           res.status(500).json({
              msg: 'Server Error'
