@@ -11,12 +11,7 @@ const productsController = {
         const { category } = req.query;
         const search = category.toLowerCase();
 
-        let data = JSON.parse(
-          fs.readFileSync(
-            path.resolve(__dirname, "../data/products.json"),
-            "utf8"
-          )
-        );
+        let data = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../data/products.json"),"utf8"));
         let product = data.filter((el) => {
           return el.category.toLowerCase().includes(search);
         });
@@ -29,11 +24,7 @@ const productsController = {
         let { q } = req.query;
         let search = q.toLowerCase();
         const db = JSON.parse(
-          fs.readFileSync(
-            path.resolve(__dirname, "../data/products.json"),
-            "utf8"
-          )
-        );
+          fs.readFileSync(path.resolve(__dirname, "../data/products.json"),"utf8"));
         let product = db.filter((p) => {
           return (
             p.title.toLowerCase().includes(search) ||
@@ -43,7 +34,6 @@ const productsController = {
         });
         return res.status(200).json(product);
       } else {
-        //console.log('entro a listar ')
         const db = JSON.parse(
           fs.readFileSync(
             path.resolve(__dirname, "../data/products.json"),
