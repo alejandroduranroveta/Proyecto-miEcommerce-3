@@ -16,9 +16,7 @@ const cartById = (req, res) => {
             })
         }
 
-        res.status(200).json({
-            products: cart.cart
-        })
+        res.status(200).json(cart)
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -34,19 +32,17 @@ const editCart = (req, res) => {
         const dataToParse = fs.readFileSync(path.resolve(__dirname, '../data/carts.json'), 'utf-8');
         const data = JSON.parse(dataToParse);
 
-        let cart = data.find(c => c.user === Number(id));
-
+        let cart = data;
+        
         if (!cart || id == 0) {
             return res.status(404).json({
                 msg: "El carrito no existe"
             })
         }
 
-        let user = 1;
-
         cart = {
-            user: user,
-            cart: req.body
+            user: req.body.user,
+            cart: req.body.cart
         };
 
         if (validCart(cart)) {

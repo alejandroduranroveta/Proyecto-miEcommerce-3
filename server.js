@@ -12,6 +12,7 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 require('dotenv').config(); 
 const PORT = process.env.PORT;
 
+app.use(express.json());
 app.use("/api/v1/products",productRoutes);
 app.use("/api/v1/users",userRoutes);
 app.use('/api/v1/carts', cartsRoutes);
