@@ -32,6 +32,11 @@ const productsController = {
             p.category.toLowerCase().includes(search)
           );
         });
+        if(product.length == 0){
+          return res.status(200).json({
+            msg: 'No hay productos para su búsqueda'
+          })
+        }
         return res.status(200).json(product);
       } else {
         const db = JSON.parse(
@@ -43,6 +48,7 @@ const productsController = {
         return res.status(200).json(db);
       }
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         msg: "Server Error",
       });
@@ -87,7 +93,6 @@ const productsController = {
       mostwanted,
       stock,
     } = req.body;
-
     if (
       !id ||
       !title ||
