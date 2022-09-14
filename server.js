@@ -19,4 +19,5 @@ app.use('/api/v1/pictures', picturesRoutes);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
-app.listen(process.env.PORT,()=> console.log("Se levanto el server"));
+const PORT = process.env.PORT;
+app.listen(PORT,()=> console.log("Se levanto el server en el puerto " + PORT));
