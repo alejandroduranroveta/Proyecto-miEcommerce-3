@@ -7,10 +7,10 @@ function isAdmin(req, res, next) {
     const listaUsuarios = JSON.parse(dbUsers);
 
     let id = -1;
-    if (req.params.id) {
+    if (req.params && req.params.id) {
       id = Number(req.params.id);
     }
-    if (req.body.id) {
+    if (req.body && req.body.id) {
       id = Number(req.body.id);
     }
     if (id === -1) {

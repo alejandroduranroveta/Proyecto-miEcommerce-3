@@ -7,10 +7,10 @@ function isGod(req, res, next) {
     const listaUsuarios = JSON.parse(dbUsers);
 
     let id = -1;
-    if (req.params.id) {
+    if (req.params && req.params.id) {
       id = Number(req.params.id);
     }
-    if (req.body.id) {
+    if (req.body && req.body.id) {
       id = Number(req.body.id);
     }
     if (id === -1) {
@@ -19,7 +19,7 @@ function isGod(req, res, next) {
       });
     }
 
-    const usuario = listaUsuarios.filter((user) => user.id === id);
+    const usuario = listaUsuarios.find((user) => user.id === id);
 
     if (usuario.role === 'God') {
       next();
@@ -30,6 +30,7 @@ function isGod(req, res, next) {
       });
     }
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       status: "error",
       error,
