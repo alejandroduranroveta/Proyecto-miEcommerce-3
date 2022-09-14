@@ -74,7 +74,6 @@ try{
 },
 deleted:(req,res)=>{
    const { id } = req.params;
-
    try {
       const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/pictures.json'), 'utf8'));
       const newData = db.filter(el => el.id_pic != Number(id));

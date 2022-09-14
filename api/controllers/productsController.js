@@ -151,12 +151,20 @@ const productsController = {
       try {
          const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
          const newData = db.filter(el => el.id != Number(id));
+         if(newData.length == 0){
+            res.status(404).json({
+               msg: 'Not Found'
+               });
+         }
+
          fs.writeFileSync(path.resolve(__dirname,'../data/products.json'), JSON.stringify(newData));
       
       } catch (error) {
          console.log(error);
-         res.send('Error inesperado');
-         }
+         res.status(500).json({
+         msg: 'Server Error'
+         });
+      }
       }
    } 
     module.exports = productsController;
