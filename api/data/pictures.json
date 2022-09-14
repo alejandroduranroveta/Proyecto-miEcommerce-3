@@ -1,52 +1,47 @@
 [
     {
-        "id_pic": 1,
-        "url": "https://ibb.co/bgYzB19",
-        "description": "Manzana roja cortada al medio" 
-    },
-    {
         "id_pic": 2,
         "url": "https://ibb.co/DpB8HHp",
-        "description": "Muchas manzanas rojas" 
+        "description": "Muchas manzanas rojas"
     },
     {
         "id_pic": 3,
         "url": "https://ibb.co/8zvwjyg",
-        "description": "Lechuga en tierra" 
+        "description": "Lechuga en tierra"
     },
     {
         "id_pic": 4,
         "url": "https://ibb.co/x1D01m2",
-        "description": "Lechuga preparada para ensalada" 
+        "description": "Lechuga preparada para ensalada"
     },
     {
         "id_pic": 5,
         "url": "https://ibb.co/Z1v9Bn7",
-        "description": "arvejas sobre la mesa" 
+        "description": "arvejas sobre la mesa"
     },
     {
         "id_pic": 6,
         "url": "https://ibb.co/d7WDt4P",
-        "description": "arvejas en agua hirviendo" 
+        "description": "arvejas en agua hirviendo"
     },
     {
         "id_pic": 7,
         "url": "https://ibb.co/7kyLNQT",
-        "description": "Mouse gammer Geniotech blanco" 
+        "description": "Mouse gammer Geniotech blanco"
     },
     {
         "id_pic": 8,
         "url": "https://ibb.co/RNXLTCt",
-        "description": "Mouse gammer Geniotech violeta en caja" 
+        "description": "Mouse gammer Geniotech violeta en caja"
     },
     {
         "id_pic": 9,
         "url": "https://ibb.co/Yt3LN3c",
-        "description": "Microfono USB vistas con zoom" 
+        "description": "Microfono USB vistas con zoom"
     },
     {
         "id_pic": 10,
         "url": "https://ibb.co/FgGX3w6",
-        "description": "Microfono USB con medidas" 
+        "description": "Microfono USB con medidas"
     }
 ]

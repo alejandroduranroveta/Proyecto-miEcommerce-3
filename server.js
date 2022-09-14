@@ -10,13 +10,10 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 
 
 require('dotenv').config(); 
-const PORT = process.env.PORT;
-
-app.use(express.json());
 app.use("/api/v1/products",productRoutes);
 app.use("/api/v1/users",userRoutes);
 app.use('/api/v1/carts', cartsRoutes);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
-app.listen(PORT,()=>console.log(`Corriendo servidor en el puerto ${PORT}`));
+app.listen(process.env.PORT,()=> console.log("Se levanto el server"));

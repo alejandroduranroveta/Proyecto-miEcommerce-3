@@ -1,7 +1,40 @@
-const e = require("express");
 const fs = require("fs");
 const path = require("path");
+const generateJWT = require('../helpers/generateJWT');
+
+
 const userController = {
+	login: async (req,res) => {
+		try {
+			const {username, password} = req.body;
+			const bdUser = fs.readFileSync(path.join(__dirname, "/../data/users.json"),"utf-8");
+			const users = JSON.parse(bdUser);
+			let user = users.find(user => user.username == username && user.password == password);
+			if(user){
+				delete(user.password);
+				const token = await generateJWT (user)
+				return res.status(200).json({
+						success: true,
+						message: "Authorized",
+						user: {
+						iduser: user.id,
+						username: user.username
+						},
+						token				
+					});
+			}else{
+				return res.status(401).json({
+					msg: "Error en credenciales"
+				})
+			}
+		} catch (error) {
+			return res.status(500).json({ 
+				msg: 'ok',
+				error
+			});
+		}
+
+	},
 	list: (req, res) => {
 		try {
 			const bdUser = fs.readFileSync(
