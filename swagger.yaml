@@ -13,7 +13,7 @@ servers:
     description: Servidor de la api
     
 tags:
-  - name: Usuarios
+  - name: Usuario
     description: Todos los endpoints de usuarios
   - name: Productos
     description: Todos los endpoints de productos
@@ -25,7 +25,7 @@ paths:
   /users:
     get:
       tags: 
-        - Usuarios
+        - Usuario
       summary:  Recupera la lista de users. Responde con un array conteniendo todos los users del sistema..
       responses:
         '200':    # status code
@@ -153,3 +153,71 @@ components:
           example: shorturl.at/IJK45
       xml:
         name: usuarios
+    Product:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        title: 
+          type: string
+          example: Manzanas rojas
+        price: 
+          type: number
+          example: 49
+        description:
+          type: string
+          example: Manzanas deliciosas y probablemente naturales
+        image:
+          type: string
+          example: shorturl.at/IJK45
+        gallery:
+          type: array
+          items:
+            type: object
+            properties:
+              picture_id: 
+                type: number
+              picture_url:
+                type: string
+                example: shorturl.at/IJK45
+        category:
+          type: string
+          example: Fruta
+        mostwanted:
+          type: boolean
+          example: false
+        stock:
+          type: number
+          example: 0
+    Picture:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        url:
+          type: string
+          example: shorturl.at/IJK45
+        description:
+          type: string
+          example: Foto linda de una manzana
+    Cart:
+      type: object
+      properties:
+        user: 
+          type: number
+          example: 1
+        Cart:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: number
+                example: 1
+              quantity:
+                type: number
+                example: 5
+        
+            
