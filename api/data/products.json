@@ -16,7 +16,7 @@
             }
         ],
         "category": "Fruta",
-        "mostwanted": false,
+        "mostwanted": true,
         "stock": 0
     },
     {
@@ -98,5 +98,10 @@
         "category": "Computación",
         "mostwanted": false,
         "stock": 0
+    },
+    {
+        "id_pic": 2,
+        "url": "https://ibb.co/DpB8HHp",
+        "description": "Muchas manzanas rojas"
     }
 ]

@@ -5,7 +5,6 @@ const path = require('path')
 const productsController = {
    
     list: (req, res) => {
-     // console.log(!req.query.q)
        try {
          if(req.query.category){
              //busqueda por categoria
@@ -29,7 +28,7 @@ const productsController = {
                                                  p.category.toLowerCase().includes(search)})
             return res.status(200).json(product)
          }else{
-            console.log('entro a listar ')
+            //console.log('entro a listar ')
             const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
             return res.status(200).json(db);        
          }
@@ -130,7 +129,13 @@ const productsController = {
       try {
          const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
          let products = db.filter(el => el.mostwanted == true)
-         res.status(200).json(products);
+
+         if(products.length == 0){
+            res.send('No se encuentran resultados')
+         }else{
+            res.status(200).json(products);
+         }
+         
 
       }catch (error) {
          console.log(error);
@@ -146,7 +151,7 @@ const productsController = {
       try {
          const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
          const newData = db.filter(el => el.id != Number(id));
-         fs.writeFileSync('db.json', JSON.stringify(newData));
+         fs.writeFileSync(path.resolve(__dirname,'../data/products.json'), JSON.stringify(newData));
       
       } catch (error) {
          console.log(error);
