@@ -1,1 +1,67 @@
-[{"id":1,"title":"Manzana roja","price":60,"description":"1Kg de manzana roja","image":"https://ibb.co/Z22rV34","gallery":[{"picture_id":1,"picture_url":""},{"picture_id":2,"picture_url":""}],"category":"Fruta","mostwanted":true,"stock":0},{"id":4,"title":"Mouse USB","price":990,"description":"Mouse gammer Geniotech con rgb ","image":"https://ibb.co/tz1QSPm","gallery":[{"picture_id":1,"picture_url":""},{"picture_id":2,"picture_url":""}],"category":"Computación","mostwanted":false,"stock":0},{"id":5,"title":"Micrófono USB","price":350,"description":"Microfono de pie con conector USB-A, cable de 1.5mts","image":"https://ibb.co/DRknHrp","gallery":[{"picture_id":1,"picture_url":""},{"picture_id":2,"picture_url":""}],"category":"Computación","mostwanted":false,"stock":0},{"id_pic":2,"url":"https://ibb.co/DpB8HHp","description":"Muchas manzanas rojas"}]
+[
+    {
+        "id": 1,
+        "title": "Manzana roja",
+        "price": 60,
+        "description": "1Kg de manzana roja",
+        "image": "https://ibb.co/Z22rV34",
+        "gallery": [
+            {
+                "picture_id": 1,
+                "picture_url": ""
+            },
+            {
+                "picture_id": 2,
+                "picture_url": ""
+            }
+        ],
+        "category": "Fruta",
+        "mostwanted": true,
+        "stock": 0
+    },
+    {
+        "id": 4,
+        "title": "Mouse USB",
+        "price": 990,
+        "description": "Mouse gammer Geniotech con rgb ",
+        "image": "https://ibb.co/tz1QSPm",
+        "gallery": [
+            {
+                "picture_id": 1,
+                "picture_url": ""
+            },
+            {
+                "picture_id": 2,
+                "picture_url": ""
+            }
+        ],
+        "category": "Computación",
+        "mostwanted": false,
+        "stock": 0
+    },
+    {
+        "id": 5,
+        "title": "Micrófono USB",
+        "price": 350,
+        "description": "Microfono de pie con conector USB-A, cable de 1.5mts",
+        "image": "https://ibb.co/DRknHrp",
+        "gallery": [
+            {
+                "picture_id": 1,
+                "picture_url": ""
+            },
+            {
+                "picture_id": 2,
+                "picture_url": ""
+            }
+        ],
+        "category": "Computación",
+        "mostwanted": false,
+        "stock": 0
+    },
+    {
+        "id_pic": 2,
+        "url": "https://ibb.co/DpB8HHp",
+        "description": "Muchas manzanas rojas"
+    }
+]
