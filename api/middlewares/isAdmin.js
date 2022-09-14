@@ -1,5 +1,5 @@
 const fs = require("fs");
-const path = require('path');
+const path = require("path");
 
 function isAdmin(req, res, next) {
   try {
@@ -21,7 +21,7 @@ function isAdmin(req, res, next) {
 
     const usuario = listaUsuarios.filter((user) => user.id === id);
 
-    if (usuario.role === "Admin") {
+    if (usuario.role === 'Admin' || usuario.role === 'God') {
       next();
     } else {
       return res.status(403).json({

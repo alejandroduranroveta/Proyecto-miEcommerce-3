@@ -2,8 +2,7 @@ const fs = require("fs");
 
 function isGuest(req,res,next) {
   try {
-    const dbUsers = fs.readFileSync(
-      "/Users/federicodefortuny/Desktop/Sprint-1/Proyecto-miEcommerce-3/api/data/users.json","utf8");
+    const dbUsers = fs.readFileSync(path.join(__dirname,'/../data/users.json'),"utf8");
     const listaUsuarios = JSON.parse(dbUsers);
 
     let id = -1;
@@ -21,13 +20,13 @@ function isGuest(req,res,next) {
 
     const usuario = listaUsuarios.filter((user) => user.id === id);
 
-    if (usuario.role === 'Guest') {
+    if (usuario.role === 'Guest' || usuario.role === 'Admin' || usuario.role === 'God') {
       next();
 
     }else{
       return res.status(403).json({
         status: 'error',
-        msg: 'Debes tener un permiso mayor al de "guest"'
+        msg: 'Al menos debes ser usuario "Guest"'
       });
     }
 
