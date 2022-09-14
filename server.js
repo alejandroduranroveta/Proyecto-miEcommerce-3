@@ -9,6 +9,7 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 
+app.use(express.json());
 
 require('dotenv').config(); 
 app.use("/api/v1/products",productRoutes);

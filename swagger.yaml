@@ -29,6 +29,8 @@ paths:
       tags: 
         - Usuario
       summary:  Recupera la lista de users. Responde con un array conteniendo todos los users del sistema..
+      security:
+        - bearerAuth: []
       responses:
         '200':    # status code
           description: Un array de usuarios
@@ -44,6 +46,8 @@ paths:
       tags:
         - Usuario
       summary:  Crea un nuevo user. Debe recibir un body con la info del user a crear. Responde con la info completa del nuevo user.
+      security:
+        - bearerAuth: []      
       requestBody:
         description: Crea un nuevo user
         content:
@@ -67,6 +71,8 @@ paths:
       tags: 
         - Usuario
       summary: Recupera el user con el id solicitado. Responde con la información completa del user con el id buscado.
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id
@@ -89,6 +95,8 @@ paths:
       tags:
         - Usuario
       summary: Actualiza el user identificado con id. Debe recibir un body con la info del user a modificar. Responde con la info completa del user modificado.
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id
@@ -120,6 +128,8 @@ paths:
       tags:
         - Usuario
       summary: Eliminar el user identificado con id. Cuando se elimina un user, primero debe vaciarse su carrito (cart). 
+      security:
+        - bearerAuth: []         
       requestBody:
         description: Id del usuario a eliminar
         content:
@@ -145,6 +155,8 @@ paths:
       tags:
         - Productos
       summary: Recupera la lista de products. Responde con un array conteniendo todos los products del sistema.
+      security:
+        - bearerAuth: []          
       parameters:
         - in: query
           name: category
@@ -167,6 +179,8 @@ paths:
       tags:
         - Productos
       summary:  Crea un nuevo producto. Debe recibir un body con la info del producto a crear. Responde con la info completa del producto.
+      security:
+        - bearerAuth: []          
       requestBody:
         description: Crea un nuevo producto
         content:
@@ -190,6 +204,8 @@ paths:
       tags: 
         - Productos
       summary: Recupera el producto con el id solicitado. Responde con la información completa del producto con el id buscado.
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id
@@ -212,6 +228,8 @@ paths:
       tags:
         - Productos
       summary: Actualiza el producto identificado con id. Debe recibir un body con la info del producto a modificar. Responde con la info completa del producto modificado.
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id
@@ -243,6 +261,8 @@ paths:
       tags:
         - Productos
       summary: Eliminar el producto identificado con id. Cuando se elimina un producto, primero debe quitarse de todos los carritos, ademas de las imagenes. 
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id
@@ -264,6 +284,8 @@ paths:
       tags:
         - Productos
       summary: Recupera la lista de products. Responde con un array conteniendo todos los products del sistema que tengan el atributa most wanted en true.
+      security:
+        - bearerAuth: []          
       responses:
         '200':    # status code
           description: Un array de productos
@@ -280,6 +302,8 @@ paths:
       tags: 
         - Productos
       summary: Recupera los productos que contengan el palabra ingresada, tanto en su nombre, descripcion o categoria
+      security:
+        - bearerAuth: []          
       parameters:
         - in: query
           name: q
@@ -301,6 +325,8 @@ paths:
       tags:
         - Carritos
       summary: Recupera el cart del user identificado con id. Responde con un array conteniendo los products del user solicitado.
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id
@@ -321,6 +347,8 @@ paths:
       tags:
         - Carritos
       summary: Actualiza el carrito identificado con id. Debe coincidir con el usuario actual
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id
@@ -353,6 +381,8 @@ paths:
       tags:
         - Pictures
       summary:  Crea ua nueva picture.
+      security:
+        - bearerAuth: []          
       requestBody:
         description: Crea una nueva picture
         content:
@@ -377,6 +407,8 @@ paths:
       tags: 
         - Pictures
       summary: Recupera las imagenes de ese producto.
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: product
@@ -402,6 +434,8 @@ paths:
       tags: 
         - Pictures
       summary: Recupera la imagen con ese id.
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id
@@ -424,6 +458,8 @@ paths:
       tags:
         - Pictures
       summary: Actualiza la info de la imagen
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id
@@ -455,6 +491,8 @@ paths:
       tags:
         - Pictures
       summary: Eliminar la picture con ese id
+      security:
+        - bearerAuth: []          
       parameters:
         - in: path
           name: id

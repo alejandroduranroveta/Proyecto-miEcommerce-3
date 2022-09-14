@@ -1,12 +1,20 @@
+const express = require('express');
 
-function extractToken (req) {
+function extractToken (req,res) {
 
-    const tokenAuth = req.headers.authorization.split(' ');
-    if(tokenAuth && tokenAuth[0] === 'Bearer'){
-        return tokenAuth[1];
-    }else{
-        return null;
+    try {
+        const tokenAuth = req.headers.authorization.split(' ');
+        if(tokenAuth && tokenAuth[0] === 'Bearer'){
+            return tokenAuth[1];
+        }else{
+            return null;
+        }
+    } catch (error) {
+        res.status(400).json({
+            msg: 'Falta token'
+        })
     }
+
 
 }
 
