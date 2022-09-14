@@ -2,10 +2,7 @@ const fs = require("fs");
 
 function isGod(req, res, next) {
   try {
-    const dbUsers = fs.readFileSync(
-      "/Users/federicodefortuny/Desktop/Sprint-1/Proyecto-miEcommerce-3/api/data/users.json",
-      "utf8"
-    );
+    const dbUsers = fs.readFileSync(path.join(__dirname,'/../data/users.json'),"utf8");
     const listaUsuarios = JSON.parse(dbUsers);
 
     let id = -1;
@@ -23,12 +20,12 @@ function isGod(req, res, next) {
 
     const usuario = listaUsuarios.filter((user) => user.id === id);
 
-    if (usuario.role === "God") {
+    if (usuario.role === 'God') {
       next();
     } else {
       return res.status(403).json({
         status: "error",
-        msg: "No podes acceder sin permisos.",
+        msg: "No puedes acceder sin permisos 'God'.",
       });
     }
   } catch (error) {
