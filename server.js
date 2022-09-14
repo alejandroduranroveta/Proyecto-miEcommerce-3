@@ -10,6 +10,6 @@ require('dotenv').config();
 
 app.use("/api/v1/products",productRoutes);
 app.use("/api/v1/pictures",picturesRoutes);
-//app.use("/api/v1/users",userRoutes);
+app.use("/api/v1/users",userRoutes);
 
 app.listen(5000,()=>console.log("Se levanto el server"));
