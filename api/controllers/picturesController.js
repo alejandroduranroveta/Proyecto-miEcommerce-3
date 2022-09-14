@@ -26,7 +26,9 @@ create: (req, res) => {//agregar una nueva imagen a la bd
    let { id_pic, url = "",description= ""} = req.body;
 
    if (!id_pic||!url) {
-      return res.send('Para crear la imagen se necesitan mas datos');
+      return res.status(400)({
+         msg: 'Bad Request'
+      });
    }
    let newProduct = {
       id_pic,
@@ -80,9 +82,32 @@ deleted:(req,res)=>{
       return res.status(200).json(newData)
    
    } catch (error) {
-      console.log(error);
-      res.send('Error inesperado');
-      }
+      res.status(500).json({
+         msg: 'Error'
+      });
    }
+   },
+   picturesProduct:(req, res) => {
+      console.log('entro a picturesProduct')
+        try {
+         let data = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
+         //products/id/pictures 
+         if(req.params.id){
+            const{id} = req.params
+            const dataToShow = data.find(elm => elm.id === Number(id));
+              return res.status(200).json(dataToShow["gallery"]) 
+         }
+          if(req.query.product){
+         //busqueda por ?product=id
+              const{product} = req.query
+              const dataToShow = data.find(elm => elm.id === Number(product));
+              return res.status(200).json(dataToShow["gallery"]) 
+          }
+        } catch (error) {
+           res.status(500).json({
+              msg: 'Server Error'
+           });
+        }
+       }
 }
 module.exports = picturesController;
