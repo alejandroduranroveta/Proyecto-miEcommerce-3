@@ -1,4 +1,5 @@
 
+const e = require('express');
 const fs = require('fs');
 const path = require('path')
 
@@ -151,14 +152,16 @@ const productsController = {
       try {
          const db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data/products.json'), 'utf8'));
          const newData = db.filter(el => el.id != Number(id));
-         if(newData.length == 0){
+         if(newData.length == db.length){
             res.status(404).json({
                msg: 'Not Found'
                });
+         }else{
+            fs.writeFileSync(path.resolve(__dirname,'../data/products.json'), JSON.stringify(newData));
+            res.status(200).json({
+               msg: 'Ok',
+               });
          }
-
-         fs.writeFileSync(path.resolve(__dirname,'../data/products.json'), JSON.stringify(newData));
-      
       } catch (error) {
          console.log(error);
          res.status(500).json({
