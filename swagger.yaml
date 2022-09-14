@@ -87,6 +87,13 @@ paths:
       tags:
         - Usuario
       summary: Actualiza el user identificado con id. Debe recibir un body con la info del user a modificar. Responde con la info completa del user modificado.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          description: Id del usuario a editar     
       requestBody:
         description: Editar el usuario
         content:
@@ -111,6 +118,17 @@ paths:
       tags:
         - Usuario
       summary: Eliminar el user identificado con id. Cuando se elimina un user, primero debe vaciarse su carrito (cart). 
+      requestBody:
+        description: Id del usuario a eliminar
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: 2
+        required: true
       responses: 
         '200':
           description: El usuario fue eliminado
