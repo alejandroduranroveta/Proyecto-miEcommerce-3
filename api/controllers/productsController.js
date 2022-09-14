@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const cartsController = require('./cartsController');
 
 const productsController = {
 	list: (req, res) => {
@@ -205,8 +206,11 @@ const productsController = {
 					"utf8"
 				)
 			);
+			const deletedProduct = db.find(p => p.id == id);
 			const newData = db.filter((el) => el.id != Number(id));
 			fs.writeFileSync(path.resolve(__dirname, "../data/products.json"), JSON.stringify(newData));
+			cartsController.removeProductFromCart(id);
+            return res.status(200).json(deletedProduct);
 		} catch (error) {
 			console.log(error);
          res.status(500).json({

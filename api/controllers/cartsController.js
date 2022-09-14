@@ -36,7 +36,7 @@ const editCart = (req, res) => {
 
         let cart = data.find(c => c.user === Number(id));
 
-        if (!cart || id == -1) {
+        if (!cart || id == 0) {
             return res.status(404).json({
                 msg: "El carrito no existe"
             })
@@ -91,4 +91,13 @@ const productExists = (p, products) => {
     return _prod;
 }
 
-module.exports = { cartById, editCart };
+const removeProductFromCart = productId => {
+    const dataToParse = fs.readFileSync(path.resolve(__dirname, '../data/carts.json'), 'utf-8');
+    const data = JSON.parse(dataToParse);
+
+    let cart = data.cart.filter(item => item.product != productId);
+    
+    fs.writeFileSync(path.resolve(__dirname, '../data/carts.json'),JSON.stringify(cart))
+
+}
+module.exports = { cartById, editCart,removeProductFromCart };
