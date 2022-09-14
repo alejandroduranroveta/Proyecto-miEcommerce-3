@@ -40,7 +40,7 @@ paths:
           description: Error del Servidor
     post:
       tags:
-        - Usuarios
+        - Usuario
       summary:  Crea un nuevo user. Debe recibir un body con la info del user a crear. Responde con la info completa del nuevo user.
       requestBody:
         description: Crea un nuevo user
@@ -63,7 +63,7 @@ paths:
   /users/{id}:
     get:
       tags: 
-        - Usuarios
+        - Usuario
       summary: Recupera el user con el id solicitado. Responde con la información completa del user con el id buscado.
       parameters:
         - in: path
@@ -85,7 +85,7 @@ paths:
           description: Error del servidor
     put:
       tags:
-        - Usuarios
+        - Usuario
       summary: Actualiza el user identificado con id. Debe recibir un body con la info del user a modificar. Responde con la info completa del user modificado.
       requestBody:
         description: Editar el usuario
@@ -109,7 +109,7 @@ paths:
           description: Error del servidor
     delete:
       tags:
-        - Usuarios
+        - Usuario
       summary: Eliminar el user identificado con id. Cuando se elimina un user, primero debe vaciarse su carrito (cart). 
       responses: 
         '200':
