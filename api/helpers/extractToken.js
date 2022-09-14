@@ -10,4 +10,4 @@ function extractToken (req) {
 
 }
 
-module.export = extractToken;
+module.exports = extractToken;

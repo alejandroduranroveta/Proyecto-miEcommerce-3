@@ -80,6 +80,13 @@ const userController = {
 				profilepic = "www.img.com",
 				role
 			} = req.body;
+
+			if(!id){
+				return res.status(400).json({
+					msg: 'Se requiere id'
+				})
+			}
+			
 			let newUser = {
 				id,
 				email,
