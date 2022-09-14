@@ -1,3 +1,4 @@
+const e = require("express");
 const fs = require("fs");
 const path = require("path");
 const userController = {
@@ -7,7 +8,9 @@ const userController = {
 				path.join(__dirname, "/../data/users.json"),
 				"utf-8"
 			);
-			res.status(200).json(JSON.parse(bdUser));
+			const users = JSON.parse(bdUser);
+			users.map(user=>delete(user.password));
+			res.status(200).json(users);
 		} catch (error) {
 			console.log(error);
 			res.status(500).json({
@@ -23,7 +26,7 @@ const userController = {
 			);
 			let users = JSON.parse(bdUser);
 			let user = users.find((e) => e.id === Number(req.params.id));
-			console.log(user);
+			users.map(user=>delete(user.password));
 			user
 				? res.status(200).json(user)
 				: res.status(404).json({ msg: "Not fund user" });

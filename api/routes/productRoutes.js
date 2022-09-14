@@ -1,16 +1,19 @@
 const express = require('express');
 const {list,detail,create,modify,mostwanted,deleted} = require('../controllers/productsController');
 const router = express.Router();
+const isGod = require("../middlewares/isGod");
+const isGuest = require("../middlewares/isGuest");
+const isAdmin = require("../middlewares/isAdmin");
 
-router.get('/search',list)
-router.get('/mostwanted',mostwanted)
-router.get('/',list); //aca hace listado y ademas hace la busqueda por category
+router.get('/search',isGuest,list)
+router.get('/mostwanted',isGuest,mostwanted)
+router.get('/',isGuest,list); //aca hace listado y ademas hace la busqueda por category
 
 
-router.post('/',create)
-router.put('/:id',modify)
+router.post('/',isGod,create)
+router.put('/:id',isAdmin,modify)
 
-router.get('/:id',detail)
-router.delete('/:id',deleted)
+router.get('/:id',isAdmin,detail)
+router.delete('/:id',isGod,deleted)
 
 module.exports = router;

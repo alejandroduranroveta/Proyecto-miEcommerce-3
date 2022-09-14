@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 
 function isGuest(req,res,next) {
   try {
@@ -35,8 +36,6 @@ function isGuest(req,res,next) {
       status: "error",
       error,
     });
-
   }
-
-  module.exports = isGuest;
 }
+module.exports = isGuest;
