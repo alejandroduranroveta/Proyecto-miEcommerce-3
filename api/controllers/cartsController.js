@@ -6,13 +6,18 @@ const cartById = (req, res) => {
 
     try {
         const dataToParse = fs.readFileSync(path.resolve(__dirname, '../data/carts.json'), 'utf-8');
-        const data = JSON.parse(dataToParse);
-
-        const cart = data.find(c => c.user === Number(id));
+        const cart = JSON.parse(dataToParse);
+        let idToken = 1;
 
         if (!cart || id == 0) {
             return res.status(404).json({
                 msg: "El carrito no existe"
+            })
+        }
+
+        if(idToken != cart.user){
+            return res.status(403).json({
+                msg: 'Solo puede acceder a su propio carrito'
             })
         }
 
@@ -67,7 +72,6 @@ const editCart = (req, res) => {
 const validCart = cart => {
     cartArray = cart.cart;
     let products = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/products.json'), 'utf-8'));
-
     if (!cartArray || cartArray.length < 1) return false;
 
     let valid = true;
