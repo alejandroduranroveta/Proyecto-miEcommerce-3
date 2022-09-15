@@ -2,12 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 const cartById = (req, res) => {
-    const { id } = req.params;
+    const { id } = req.dataToken;
 
     try {
         const dataToParse = fs.readFileSync(path.resolve(__dirname, '../data/carts.json'), 'utf-8');
         const cart = JSON.parse(dataToParse);
-        let idToken = 1;
 
         if (!cart || id == 0) {
             return res.status(404).json({
@@ -15,7 +14,7 @@ const cartById = (req, res) => {
             })
         }
 
-        if(idToken != cart.user){
+        if (id != cart.user) {
             return res.status(403).json({
                 msg: 'Solo puede acceder a su propio carrito'
             })
@@ -38,7 +37,7 @@ const editCart = (req, res) => {
         const data = JSON.parse(dataToParse);
 
         let cart = data;
-        
+
         if (!cart || id == 0) {
             return res.status(404).json({
                 msg: "El carrito no existe"
@@ -50,8 +49,8 @@ const editCart = (req, res) => {
             cart: req.body.cart
         };
 
-        if (validCart(cart)) {
-            fs.writeFileSync(path.resolve(__dirname, '../data/carts.json'),JSON.stringify(cart))
+        if (validCart(cart, res)) {
+            fs.writeFileSync(path.resolve(__dirname, '../data/carts.json'), JSON.stringify(cart))
             return res.status(200).json(cart)
         }
 
@@ -69,26 +68,31 @@ const editCart = (req, res) => {
     }
 }
 
-const validCart = cart => {
+const validCart = (cart, res) => {
     cartArray = cart.cart;
     let products = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/products.json'), 'utf-8'));
     if (!cartArray || cartArray.length < 1) return false;
 
-    let valid = true;
+    let existe = true;
     cartArray.forEach(e => {
-        if (!e.product || !productExists(e.product, products) || !e.quantity || e.quantity < 1) {
-            valid = false;
+        if (!e.product || !productExists(e.product, products, res) || !e.quantity || e.quantity < 1) {
+            existe = false;
             return;
         }
     })
-
-    return valid;
+    return existe;
 }
 
-const productExists = (p, products) => {
+const productExists = (p, products, res) => {
     let _prod = products.find(pr => pr.id == p);
-    if (!_prod) console.log('Producto ' + p + ' no existe.');
-    return _prod;
+    if (!_prod) {
+        console.log('Producto ' + p + ' no existe.');
+        res.status(400).json({
+            msg: `El producto ${p} no existe.`
+        })
+        return false;
+    }
+    return true;
 }
 
 const removeProductFromCart = productId => {
@@ -96,8 +100,8 @@ const removeProductFromCart = productId => {
     const data = JSON.parse(dataToParse);
 
     let cart = data.cart.filter(item => item.product != productId);
-    
-    fs.writeFileSync(path.resolve(__dirname, '../data/carts.json'),JSON.stringify(cart))
+
+    fs.writeFileSync(path.resolve(__dirname, '../data/carts.json'), JSON.stringify(cart))
 
 }
-module.exports = { cartById, editCart,removeProductFromCart };
+module.exports = { cartById, editCart, removeProductFromCart };

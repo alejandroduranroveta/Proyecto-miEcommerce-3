@@ -1,8 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-function emptyCart(req, res, next) {
-  const {id} = req.body;
+function emptyCart(id) {
 
   if (!id) {
     return res.status(400).json({
@@ -14,7 +13,6 @@ function emptyCart(req, res, next) {
   try {
     const cartDB = fs.readFileSync(path.join(__dirname + "/../data/carts.json"),"utf8");
     const cart = JSON.parse(cartDB);
-    console.log(cart)
 
     if (cart.user !== Number(id)) {
       const newCart = {
@@ -25,10 +23,7 @@ function emptyCart(req, res, next) {
         path.join(__dirname + "/../data/carts.json"),
         JSON.stringify(newCart)
       );
-      next();
-    } else {
-      next();
-    }
+    } 
     
   } catch (error) {
     res.status(500).json({
