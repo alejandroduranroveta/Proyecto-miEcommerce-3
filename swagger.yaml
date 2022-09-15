@@ -13,6 +13,8 @@ servers:
     description: Servidor de la api
     
 tags:
+  - name: Login
+    description: Realizar el login para tener un token
   - name: Usuario
     description: Todos los endpoints de usuarios
   - name: Productos
@@ -62,6 +64,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Usuario'
+        '400':
+          description: Bad request
+        '500':
+          description: Error del servidor
+  /users/login:
+    post:
+      tags:
+        - Login
+      summary:  Ingresa las nombre de usuario y contraseña para adquirir el token     
+      requestBody:
+        description: Login
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: carlitox
+                password:
+                  type: string
+                  example: '123456'
+        required: true
+      responses:
+        '201':
+          description: Login correcto
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Authorized
+                  user:
+                    type: object
+                    properties:
+                      iduser:
+                        type: number
+                        example: 3
+                      username:
+                        type: string
+                        example: waltermolina
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWR1c2VyIjozLCJ1c2VybmFtZSI6IndhbHRlcm1vbGluYUBtc24uY29tIn0sImlhdCI6MTY0OTAzMDcwMCwiZXhwIjoxNjQ5MDM0MzAwfQ.bUaOhRJJQc7sgMbar_Bwp_Ytj-ruLbkTB0Hdc-f0lNM
         '400':
           description: Bad request
         '500':
@@ -326,14 +377,7 @@ paths:
         - Carritos
       summary: Recupera el cart del user identificado con id. Responde con un array conteniendo los products del user solicitado.
       security:
-        - bearerAuth: []          
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: number
-          required: true
-          description: El carrito
+        - bearerAuth: []
       responses:
         '200':
           description: El carrito encontrado
@@ -348,14 +392,7 @@ paths:
         - Carritos
       summary: Actualiza el carrito identificado con id. Debe coincidir con el usuario actual
       security:
-        - bearerAuth: []          
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: number
-          required: true
-          description: Id del usuario del carrito     
+        - bearerAuth: [] 
       requestBody:
         description: Editar el carrito
         content:
