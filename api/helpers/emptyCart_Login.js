@@ -16,7 +16,7 @@ function emptyCart(id) {
 
     if (cart.user !== Number(id)) {
       const newCart = {
-        user: id,
+        user: Number(id),
         cart: [],
       };
       fs.writeFileSync(

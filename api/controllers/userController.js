@@ -76,11 +76,11 @@ const userController = {
 				id,
 				email = "exaple@gmail.com",
 				username = "pepito",
-				password = "123",
+				password = "1234",
 				firtsname = "Anonymous",
 				lastname = "Anonymous",
 				profilepic = "www.img.com",
-				role
+				role = "Guest"
 			} = req.body;
 
 			if(!id){
@@ -134,7 +134,9 @@ const userController = {
 				if (usersAux) {
 					usersAux = users.filter((e) => e.id !== Number(id));
 				} else {
-					return res.status(404);
+					return res.status(404).json({
+						msg: 'Usuario no encontrado'
+					});
 				}
 				usersAux.push(usuariAmodificar);
 				bdUser = fs.writeFileSync(

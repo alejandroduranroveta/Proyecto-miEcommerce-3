@@ -11,7 +11,12 @@ const productsController = {
         const { category } = req.query;
         const search = category.toLowerCase();
 
-        let data = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../data/products.json"),"utf8"));
+        let data = JSON.parse(
+          fs.readFileSync(
+            path.resolve(__dirname, "../data/products.json"),
+            "utf8"
+          )
+        );
         let product = data.filter((el) => {
           return el.category.toLowerCase().includes(search);
         });
@@ -24,7 +29,11 @@ const productsController = {
         let { q } = req.query;
         let search = q.toLowerCase();
         const db = JSON.parse(
-          fs.readFileSync(path.resolve(__dirname, "../data/products.json"),"utf8"));
+          fs.readFileSync(
+            path.resolve(__dirname, "../data/products.json"),
+            "utf8"
+          )
+        );
         let product = db.filter((p) => {
           return (
             p.title.toLowerCase().includes(search) ||
@@ -32,10 +41,10 @@ const productsController = {
             p.category.toLowerCase().includes(search)
           );
         });
-        if(product.length == 0){
+        if (product.length == 0) {
           return res.status(200).json({
-            msg: 'No hay productos para su búsqueda'
-          })
+            msg: "No hay productos para su búsqueda",
+          });
         }
         return res.status(200).json(product);
       } else {
@@ -88,50 +97,57 @@ const productsController = {
       price = 0,
       description = "",
       image = "",
-      gallery = [{ picture_id: 1, picture_url: "" }],
+      gallery = [
+        {
+          picture_id: 1,
+          picture_url: "" 
+        }
+      ],
       category = 0,
       mostwanted,
       stock,
     } = req.body;
-    if (
-      !id ||
-      !title ||
-      !price ||
-      !gallery[0].picture_id ||
-      !gallery[0].picture_url
-    ) {
-      return res.send("Para crear el producto se necesitan mas datos");
-    }
-    let newProduct = {
-      id,
-      title,
-      price,
-      description,
-      image,
-      gallery,
-      category,
-      mostwanted,
-      stock,
-    };
 
-    try {
-      const db = JSON.parse(
-        fs.readFileSync(
+    const condition = (!id || !title ||
+    !price || !gallery[0].picture_id ||
+    !gallery[0].picture_url);
+
+    console.log(gallery[0].picture_id);
+    if (condition) {
+      return res.status(400).json({ msg: "Para crear el producto se necesitan mas datos"});
+      
+    } else {
+      let newProduct = {
+        id,
+        title,
+        price,
+        description,
+        image,
+        gallery,
+        category,
+        mostwanted,
+        stock,
+      };
+
+      try {
+        const db = JSON.parse(
+          fs.readFileSync(
+            path.resolve(__dirname, "../data/products.json"),
+            "utf8"
+          )
+        );
+        db.push(newProduct);
+        fs.writeFileSync(
           path.resolve(__dirname, "../data/products.json"),
-          "utf8"
-        )
-      );
-      db.push(newProduct);
-      fs.writeFileSync(
-        path.resolve(__dirname, "../data/products.json"),
-        JSON.stringify(db)
-      );
-      res.status(200).json(newProduct);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        msg: "Server Error",
-      });
+          JSON.stringify(db)
+        );
+        res.status(200).json(newProduct);
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({
+          msg: "Server Error",
+        });
+      }
     }
   },
 
