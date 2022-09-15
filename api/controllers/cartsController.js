@@ -32,7 +32,7 @@ const cartById = (req, res) => {
 }
 
 const editCart = (req, res) => {
-    const { id } = req.params;
+    const { id } = req.dataToken;
 
     try {
         const dataToParse = fs.readFileSync(path.resolve(__dirname, '../data/carts.json'), 'utf-8');
@@ -47,7 +47,7 @@ const editCart = (req, res) => {
         }
 
         cart = {
-            user: req.body.user,
+            user: id,
             cart: req.body.cart
         };
 
