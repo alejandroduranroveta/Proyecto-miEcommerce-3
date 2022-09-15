@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+let responseSent = false;
+
 const cartById = (req, res) => {
     const { id } = req.dataToken;
 
@@ -54,10 +56,10 @@ const editCart = (req, res) => {
             return res.status(200).json(cart)
         }
 
-
-        res.status(400).json({
-            msg: 'Formato de carts incorrecto'
-        })
+        if (!responseSent)
+            res.status(400).json({
+                msg: 'Formato de carts incorrecto'
+            })
 
 
     } catch (error) {
@@ -86,6 +88,7 @@ const validCart = (cart, res) => {
 const productExists = (p, products, res) => {
     let _prod = products.find(pr => pr.id == p);
     if (!_prod) {
+        responseSent = true;
         console.log('Producto ' + p + ' no existe.');
         res.status(400).json({
             msg: `El producto ${p} no existe.`
